@@ -44,6 +44,9 @@ public class PlayerController: MonoBehaviour
         Vector2 input = playerInput.actions["Movement"].ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
         Transform cameraTransform = Camera.main.transform;
+        move = move.x * cameraTransform.right + move.z * cameraTransform.forward;
+        move.y = 0f;
+        controller.Move(move * Time.deltaTime * speed);
 
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
@@ -51,17 +54,8 @@ public class PlayerController: MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        move = move.x * cameraTransform.right + move.z * cameraTransform.forward;
-        move.y = 0f;
-        controller.Move(move * Time.deltaTime * speed);
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
-
         // Makes the player jump
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (playerInput.actions["Jump"].triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
@@ -69,6 +63,13 @@ public class PlayerController: MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+        if (input != Vector2.zero)
+        { 
+            //ngl, i got this from a video about rebinding stuff in unity, i dont remember this much lol: here's the link if needed -- https://www.youtube.com/watch?v=csqVa2Vimao --
 
+            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0, targetAngle, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * speed); //might need to change if too high
+        }
     }
 }

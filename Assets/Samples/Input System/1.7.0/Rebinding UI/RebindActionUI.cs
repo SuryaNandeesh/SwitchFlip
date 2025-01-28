@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -262,8 +263,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation = null;
             }
 
+            // Diable the action before use
+            action.Disable();
+
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
+                .WithControlsExcluding("<Mouse>/leftButton")
+                .WithControlsExcluding("<Mouse>/rightButton")
+                .WithControlsExcluding("<Mouse>/press")
+                .WithControlsExcluding("<Mouse>/position")
+                .WithCancelingThrough("<Keyboard>/escape")
                 .OnCancel(
                     operation =>
                     {
@@ -275,8 +284,18 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .OnComplete(
                     operation =>
                     {
+                        action.Enable();
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
+
+                        if (CheckDuplicateBindings(action, bindingIndex, allCompositeParts))
+                        {
+                            action.RemoveBindingOverride(bindingIndex);
+                            CleanUp();
+                            PerformInteractiveRebind(action, bindingIndex, allCompositeParts);
+                            return;
+                        }
+
                         UpdateBindingDisplay();
                         CleanUp();
 
@@ -315,6 +334,39 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             m_RebindOperation.Start();
         }
+
+        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts = false)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+            foreach (InputBinding binding in action.actionMap.bindings)
+            {
+                if(binding.action == newBinding.action)
+                {
+                    continue;
+                }
+                if(binding.effectivePath == newBinding.effectivePath)
+                {
+                    Debug.Log("Duplicate binding found: " + newBinding.effectivePath);
+                    return true;
+                }
+            }
+            //check for dupe bindings
+            if (allCompositeParts)
+            {
+                for (int i = 1; i < bindingIndex; i++)
+                {
+                    if (action.bindings[i].effectivePath == newBinding.overridePath)
+                    {
+                        Debug.Log("Duplicate binding found: " + newBinding.effectivePath);
+                        return true;
+                    }
+                }
+            }
+
+
+            return false;
+        }
+
 
         protected void OnEnable()
         {
@@ -420,7 +472,14 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             UpdateBindingDisplay();
         }
 
-        #endif
+#endif
+
+        private void Start()
+        {
+            UpdateActionLabel();
+            UpdateBindingDisplay();
+        }
+
 
         private void UpdateActionLabel()
         {

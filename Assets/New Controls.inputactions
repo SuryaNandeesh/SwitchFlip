@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "81652ecf-a7c2-4aba-94e5-6eceac045595",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -79,6 +88,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0509ffe1-346c-4653-82b1-54ebc6213e2a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2009dc51-8711-4086-aa01-74524e50f4b6",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PerspectiveFlip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -87,7 +118,7 @@
             "id": "81a2ca14-7959-4a7e-a4e3-9d8130443848",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "28a73a77-e4b9-4bac-8fea-780fec9d0fe8",
                     "expectedControlType": "Button",
@@ -99,12 +130,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6316b183-0491-492a-b672-f77b6cd098f6",
-                    "path": "",
+                    "id": "96366f56-b298-41be-a706-1cff673bf4e4",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
