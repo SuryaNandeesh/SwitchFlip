@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PerspectiveFlip",
+                    "name": "Flip",
                     "type": "Button",
                     "id": "4554fe8f-e4a0-4fda-a1da-8d3d7d3af8f6",
                     "expectedControlType": "Button",
@@ -107,7 +107,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PerspectiveFlip",
+                    "action": "Flip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
