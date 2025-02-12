@@ -5,39 +5,41 @@ using UnityEngine.InputSystem;
 
 public class PauseGame : MonoBehaviour
 {
-    [SerializeField] private InputAction pauseButton;
+    [SerializeField] private InputActionReference pauseButton;
     [SerializeField] private Canvas canvas;
 
     private bool paused = false;
 
     private void OnEnable()
     {
-        pauseButton.Enable();
-    }
-    
-    private void OnDisable()
-    {
-        pauseButton.Disable();
+        pauseButton.action.performed += _ => Pause();
+        pauseButton.action.Enable();
+
+        if (canvas != null)
+        {
+            canvas.enabled = paused;
+        }
     }
 
-    // Start is called before the first frame update
-    private void Start()
+    private void OnDisable()
     {
-        pauseButton.performed += _ => Pause(); //also followed video tutorial for figuring out this one
+        pauseButton.action.performed -= _ => Pause();
+        pauseButton.action.Disable();
+
+        if (canvas != null)
+        {
+            canvas.enabled = paused;
+        }
     }
 
     public void Pause()
     {
         paused = !paused;
-        if (paused)
+        Time.timeScale = paused ? 0 : 1; // Freeze/unfreeze game time
+
+        if (canvas != null)
         {
-            Time.timeScale = 0; //the world
-            canvas.enabled = true;
-        }
-        else
-        {
-            Time.timeScale = 1; //toki wa noki das
-            canvas.enabled = false;
+            canvas.enabled = paused;
         }
     }
 }

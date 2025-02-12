@@ -9,10 +9,13 @@ public class ResetAllBindings : MonoBehaviour
 
     public void ResetBindings()
     {
-        foreach(InputActionMap map in inputActions.actionMaps)
+        foreach (InputActionMap map in inputActions.actionMaps)
         {
             map.RemoveAllBindingOverrides();
         }
+
+        // Optional: Remove saved rebinds if they were stored
         PlayerPrefs.DeleteKey("rebinds");
+        PlayerPrefs.Save(); // Ensure PlayerPrefs changes are saved
     }
 }
