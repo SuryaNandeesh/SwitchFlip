@@ -16,7 +16,7 @@ public class PlayerController: MonoBehaviour
     private Vector3 playerVelocity;
     public bool groundedPlayer;
     public float speed = 6;
-    private float jumpHeight = 2.0f;
+    private float jumpHeight = 4.0f;
     private float gravityValue = -9.81f;
     private InputAction moveAction;
     private InputAction jumpAction;

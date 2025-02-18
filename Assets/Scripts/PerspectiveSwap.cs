@@ -14,7 +14,7 @@ public class PerspectiveSwap : MonoBehaviour
     public Camera camera2D;
     public Camera camera3D;
     public float flipDuration = 1f; //time to transition
-    public Vector3 offset2D = new Vector3(0, 5, -10); // 2D Camera Offset
+    public Vector3 offset2D = new Vector3(0, 1, -5); // 2D Camera Offset
     public Vector3 offset3D = new Vector3(0, 3, -5);  // 3D Camera Offset
 
     private bool groundedPlayer;
@@ -99,7 +99,7 @@ public class PerspectiveSwap : MonoBehaviour
         if (is2D)
         {
             // Lock camera to follow the player on X but stay fixed in Z
-            camera2D.transform.position = new Vector3(player.position.x, player.position.y + offset2D.y, offset2D.z);
+            camera2D.transform.position = new Vector3(player.position.x, player.position.y + 1, offset2D.z);
         }
         else
         {
