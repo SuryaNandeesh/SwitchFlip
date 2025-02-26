@@ -4,7 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController: MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference movement;
     [SerializeField] private Canvas canvas;
@@ -40,20 +40,18 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        groundedPlayer = controller.isGrounded;
 
-    Vector2 input = moveAction.ReadValue<Vector2>(); // Use cached action
+        Vector2 input = moveAction.ReadValue<Vector2>(); // Use cached action
         if (jumpAction.triggered && groundedPlayer)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
 
         Vector3 move = new Vector3(input.x, 0, input.y);
-        //Transform cameraTransform = Camera.main.transform;
-        //move = move.x * cameraTransform.right + move.z * cameraTransform.forward;
         move.y = 0f;
         controller.Move(move * Time.deltaTime * speed);
 
-        groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f; // Small negative value prevents floating on slopes
@@ -69,12 +67,12 @@ public class PlayerController: MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
         }
 
-        // Makes the player jump
-        if (playerInput.actions["Jump"].triggered && groundedPlayer)
-        {
-            Debug.Log("Jump Triggered!");
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-        }
+        //// Makes the player jump
+        //if (playerInput.actions["Jump"].triggered && groundedPlayer)
+        //{
+        //    Debug.Log("Jump Triggered!");
+        //    playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+        //}
 
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -86,26 +84,16 @@ public class PlayerController: MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smoother rotation
         }
-
-        /*if (input != Vector2.zero)
-        { 
-            //ngl, i got this from a video about rebinding stuff in unity, i dont remember this much lol: here's the link if needed -- https://www.youtube.com/watch?v=csqVa2Vimao --
-
-            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0, targetAngle, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * speed); //might need to change if too high
-        }*/
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            groundedPlayer = true;
-        }
-        else
-        {
-            groundedPlayer = false;
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        groundedPlayer = true;
+    //    }
+    //    else
+    //    {
+    //        groundedPlayer = false;
+    //    }
 }
