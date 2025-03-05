@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         controller = gameObject.AddComponent<CharacterController>();
+        controller.center = new Vector3(0, 1.08f, 0); // Adjust Y value based on model size
+
 
         moveAction = playerInput.actions["Movement"];
         jumpAction = playerInput.actions["Jump"];
@@ -67,14 +69,6 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
         }
 
-        //// Makes the player jump
-        //if (playerInput.actions["Jump"].triggered && groundedPlayer)
-        //{
-        //    Debug.Log("Jump Triggered!");
-        //    playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-        //}
-
-
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
@@ -85,15 +79,4 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smoother rotation
         }
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        groundedPlayer = true;
-    //    }
-    //    else
-    //    {
-    //        groundedPlayer = false;
-    //    }
 }
