@@ -7,18 +7,34 @@ public class PauseGame : MonoBehaviour
 {
     [SerializeField] private InputActionReference pauseButton;
     [SerializeField] private Canvas canvas;
-
+    [SerializeField] private Canvas canvas2;
+    private PlayerInput playerInput;
     private bool paused = false;
+    private InputAction pauseAction;
+
+    public void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        pauseAction = playerInput.actions["Pause"];
+        bool pausePressed = playerInput.actions["Pause"].IsPressed();
+    }
 
     private void OnEnable()
     {
         pauseButton.action.performed += _ => Pause();
         pauseButton.action.Enable();
 
+
         if (canvas != null)
         {
             canvas.enabled = paused;
         }
+
+        if (canvas2 != null)
+        {
+            canvas2.enabled = paused;
+        }
+
     }
 
     private void OnDisable()
@@ -29,6 +45,11 @@ public class PauseGame : MonoBehaviour
         if (canvas != null)
         {
             canvas.enabled = paused;
+        }
+
+        if (canvas2 != null)
+        {
+            canvas2.enabled = paused;
         }
     }
 
@@ -41,5 +62,15 @@ public class PauseGame : MonoBehaviour
         {
             canvas.enabled = paused;
         }
+
+        if (canvas2 != null)
+        {
+            canvas2.enabled = paused;
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
