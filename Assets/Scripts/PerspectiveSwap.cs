@@ -15,7 +15,7 @@ public class PerspectiveSwap : MonoBehaviour
     public Camera camera3D;
     public float flipDuration = 1f; //time to transition
     public Vector3 offset2D = new Vector3(0, 1, -5); // 2D Camera Offset
-    public Vector3 offset3D = new Vector3(0, 3, -5);  // 3D Camera Offset
+    public Vector3 offset3D = new Vector3(0, 6, -5);  // 3D Camera Offset
 
     private bool groundedPlayer;
     private CharacterController controller;
@@ -81,6 +81,7 @@ public class PerspectiveSwap : MonoBehaviour
         camera2D.transform.position = resetPosition;
 
         camera2D.transform.rotation = original2DRotation;
+
     }
 
     // Call this function to enable FPS camera,
