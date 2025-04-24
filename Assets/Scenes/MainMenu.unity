@@ -317,25 +317,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 386458420}
     m_Modifications:
+    - target: {fileID: 916011250351090515, guid: ebc2fca129dc4eb47b48df5953bc863e,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592963862702198889, guid: ebc2fca129dc4eb47b48df5953bc863e,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
@@ -350,12 +360,27 @@ PrefabInstance:
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -920
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -472
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
@@ -395,12 +420,12 @@ PrefabInstance:
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 442.5
+      value: 34.5
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 5826629143092539277, guid: ebc2fca129dc4eb47b48df5953bc863e,
         type: 3}
@@ -1985,11 +2010,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenu (disable on play)
       objectReference: {fileID: 0}
+    - target: {fileID: 2628578506771671977, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236988484315039202, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236988484315039202, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7377887031149756389, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 33531111}
+    - target: {fileID: 8188524189964161379, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8188524189964161379, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8188524189964161379, guid: 4212d6dd98bafc742ba2f40fee953fd4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2003,32 +2058,32 @@ PrefabInstance:
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: -820
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: -372
       objectReference: {fileID: 0}
     - target: {fileID: 8360027367878159088, guid: 4212d6dd98bafc742ba2f40fee953fd4,
         type: 3}

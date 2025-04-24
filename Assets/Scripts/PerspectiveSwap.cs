@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,6 +94,7 @@ public class PerspectiveSwap : MonoBehaviour
 
         is2D = false;
         transform.localScale = ogScale; // Restore original scale
+        //transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.x); // Unflatten
     }
 
     private void UpdateCameraPosition()
@@ -107,7 +109,7 @@ public class PerspectiveSwap : MonoBehaviour
             // Move the 3D camera behind the player
             Vector3 targetPosition = player.position + player.transform.forward * offset3D.z + Vector3.up * offset3D.y;
             camera3D.transform.position = Vector3.Lerp(camera3D.transform.position, targetPosition, Time.deltaTime * 5);
-            camera3D.transform.LookAt(player); // Make the camera always face the player
+            //camera3D.transform.LookAt(player); // Make the camera always face the player
         }
     }
 
