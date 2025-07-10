@@ -8,6 +8,8 @@ using UnityEngine.InputSystem.XR;
 public class PerspectiveSwap : MonoBehaviour
 {
     [SerializeField] public Transform player; // Player reference
+    [SerializeField] private GameObject glitchEffect; // Reference to the existing glitch effect in the scene
+    [SerializeField] private float glitchDuration = 0.5f; // How long it stays active
 
     private PlayerInput playerInput;
     private InputAction flipAction;
@@ -20,7 +22,7 @@ public class PerspectiveSwap : MonoBehaviour
 
     private bool groundedPlayer;
     private CharacterController controller;
-    //private PlayerController playerController; // Reference to PlayerController
+    private PlayerController playerController; // Reference to PlayerController
 
     private Vector3 original2DPosition;
     private Quaternion original2DRotation;
@@ -34,7 +36,7 @@ public class PerspectiveSwap : MonoBehaviour
         ogScale = transform.localScale;
         playerInput = GetComponent<PlayerInput>();
         controller = GetComponent<CharacterController>(); // Use existing CharacterController
-        //playerController = player.GetComponent<PlayerController>(); // Get the PlayerController script
+        playerController = player.GetComponent<PlayerController>(); // Get the PlayerController script
 
         // Save the original 2D camera position & rotation
         original2DPosition = camera2D.transform.position;
@@ -53,6 +55,8 @@ public class PerspectiveSwap : MonoBehaviour
         if (flipAction.triggered && groundedPlayer)
         {
             is2D = !is2D; // Toggle the state
+            TriggerGlitch(); // Activate glitch effect here
+
             if (is2D)
             {
                 Show2D();
@@ -83,6 +87,9 @@ public class PerspectiveSwap : MonoBehaviour
 
         camera2D.transform.rotation = original2DRotation;
 
+        if (playerController != null)
+            playerController.SetPerspective(is3D: false); // Tell PlayerController to use 2D input
+
     }
 
     // Call this function to enable FPS camera,
@@ -95,6 +102,9 @@ public class PerspectiveSwap : MonoBehaviour
         is2D = false;
         transform.localScale = ogScale; // Restore original scale
         //transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.x); // Unflatten
+
+        if (playerController != null)
+            playerController.SetPerspective(is3D: true); // Tell PlayerController to use 3D input
     }
 
     private void UpdateCameraPosition()
@@ -108,9 +118,26 @@ public class PerspectiveSwap : MonoBehaviour
         {
             // Move the 3D camera behind the player
             Vector3 targetPosition = player.position + player.transform.forward * offset3D.z + Vector3.up * offset3D.y;
-            camera3D.transform.position = Vector3.Lerp(camera3D.transform.position, targetPosition, Time.deltaTime * 5);
+            camera3D.transform.position = Vector3.Lerp(camera3D.transform.position, targetPosition, Time.deltaTime * 15);
             //camera3D.transform.LookAt(player); // Make the camera always face the player
         }
     }
+
+    private void TriggerGlitch()
+    {
+        if (glitchEffect != null)
+        {
+            StartCoroutine(PlayGlitchEffect());
+        }
+    }
+
+    private IEnumerator PlayGlitchEffect()
+    {
+        glitchEffect.SetActive(true);
+        yield return new WaitForSeconds(glitchDuration);
+        glitchEffect.SetActive(false);
+    }
+
+
 
 }
